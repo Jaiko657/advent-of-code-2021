@@ -1,6 +1,7 @@
 ﻿string[] instructions = File.ReadAllLines("./input");
 int depth = 0;
 int forward = 0;
+int aim = 0;
 foreach(string line in instructions)
 {
     int amount = Convert.ToInt32(Char.GetNumericValue(line, line.Length - 1));
@@ -8,12 +9,13 @@ foreach(string line in instructions)
     {
         case 'f':
             forward = forward + amount;
+            depth = depth + (amount * aim);
             break;
         case 'u':
-            depth = depth - amount;
+            aim = aim - amount;
             break;
         case 'd':
-            depth = depth + amount;
+            aim = aim + amount;
             break;
     }
 }
