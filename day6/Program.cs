@@ -1,31 +1,26 @@
 ﻿string input = File.ReadLines("./input").First();
 int[] State = input.Split(',').Select(int.Parse).ToArray();
 
-static int[] startNextDay(int[] fishSchool)
+//part2 store in frequency table so inverting the exponential storage issue
+ulong[] frequencyTable = new ulong[9];
+foreach (int value in State)
 {
-    int fishToBeBorn = 0;
-    for (int i = 0; i < fishSchool.Length; i++)
-    {
-        if (fishSchool[i] == 0) fishToBeBorn++;
-        fishSchool[i] = fishSchool[i] != 0 ? fishSchool[i]-1 : 6;
-    }
-    fishSchool = addFish(fishSchool, fishToBeBorn);
-    return fishSchool;
+    frequencyTable[value]++;
 }
 
-static int[] addFish(int[] fishSchool, int amountofFish)
+for (int i = 0; i < 256; i++)
 {
-    for (int i = 0; i < amountofFish; i++)
-    {
-        fishSchool = fishSchool.Append(8).ToArray();
-    }
-    return fishSchool;
+    foreach(int i2 in frequencyTable) Console.WriteLine(i2);
+    frequencyTable = startNextDay(frequencyTable);
+    Console.WriteLine();
 }
 
-for (int i = 0; i < 80; i++)
+static ulong[] startNextDay(ulong[] frequencyTable)
 {
-    State = startNextDay(State);
-    Console.WriteLine(i);
+    frequencyTable = frequencyTable.Skip(1).Concat(frequencyTable.Take(1)).ToArray();
+    // foreach(int i in frequencyTable) Console.WriteLine(i);
+    frequencyTable[6] += frequencyTable[8];
+    return frequencyTable;
 }
 
-Console.WriteLine(State.Length.ToString());
+Console.WriteLine(frequencyTable.Aggregate((a,c) => a + c).ToString());
