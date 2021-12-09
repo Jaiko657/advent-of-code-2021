@@ -14,7 +14,6 @@ static int calculateFuel(int positionAlligned, int[] State)
 
 static int bruteForceBestPosition(int[] State)
 {
-    int position = -69;
     int fuel = 1000000000;
     //create array with number in array
     int max = State.Max();
@@ -24,10 +23,9 @@ static int bruteForceBestPosition(int[] State)
         if (newfuel < fuel)
         {
             fuel = newfuel;
-            position = i;
         }
     }
-    return position;
+    return fuel;
 }
 
 
