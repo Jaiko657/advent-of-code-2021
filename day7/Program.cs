@@ -7,7 +7,8 @@ static int calculateFuel(int positionAlligned, int[] State)
     for (int i = 0; i < State.Length; i++)
     {
         int crabPosition = State[i];
-        fuelUsed += Math.Abs(crabPosition - positionAlligned);
+        int distanceMoved = Math.Abs(crabPosition - positionAlligned);
+        fuelUsed += (distanceMoved*(distanceMoved+1))/2;
     }
     return fuelUsed;
 }
