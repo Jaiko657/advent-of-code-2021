@@ -5,5 +5,5 @@ cd %name%
 dotnet new console
 SET input=string[] input = File.ReadAllLines("./input");
 echo %input%> Program.cs
-tasklist /FI "IMAGENAME eq VSCodium.exe" 2>NUL | find /I /N "VSCodium.exe">NUL
-if "%ERRORLEVEL%"=="1" codium.cmd ..
+tasklist /FI "IMAGENAME eq code.exe" 2>NUL | find /I /N "code.exe">NUL
+if "%ERRORLEVEL%"=="1" code.cmd ..
